@@ -43,17 +43,10 @@ public class ProdutoResource {
 	}
 
 
-	@GetMapping
-	@ResponseStatus(HttpStatus.OK)
-	public List<Produto> listAll(){
-		return repository.findAll();
-	}
-	
-	
 	@GetMapping("/{id}")
 	@ResponseBody
 	public ResponseEntity<Produto> findById(@PathVariable long id) {
-		Produto one = repository.getOne(id);
+		Produto one = repository.findOne(id);
 		
 		return one != null ? ResponseEntity.ok(one) : ResponseEntity.notFound().build();
 	}
