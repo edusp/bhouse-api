@@ -1,7 +1,5 @@
 package com.br.bhouse.api.resouces;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.bhouse.api.event.CreatedResourceEvent;
@@ -46,9 +43,9 @@ public class ProdutoResource {
 	@GetMapping("/{id}")
 	@ResponseBody
 	public ResponseEntity<Produto> findById(@PathVariable long id) {
-		Produto one = repository.findOne(id);
-		
-		return one != null ? ResponseEntity.ok(one) : ResponseEntity.notFound().build();
+		Produto produto = repository.getOne(id);
+		return produto != null ? ResponseEntity.ok(produto) : ResponseEntity.notFound().build();
+
 	}
 
 }

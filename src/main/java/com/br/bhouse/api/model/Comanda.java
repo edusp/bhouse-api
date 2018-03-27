@@ -6,12 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
+
+import com.br.bhouse.api.model.enums.Status;
 
 @Entity
 public class Comanda {
@@ -28,6 +32,17 @@ public class Comanda {
 	private BigDecimal total;
 
 	private LocalDate data;
+	
+	@Enumerated(EnumType.STRING)
+	private Status status;
+
+	public Comanda() {
+	}
+	
+	public Comanda(LocalDate now, Status status) {
+		data = now;
+		this.status = status;
+	}
 
 	public long getId() {
 		return id;
@@ -59,6 +74,10 @@ public class Comanda {
 
 	public void setData(LocalDate data) {
 		this.data = data;
+	}
+	
+	public void addProduto(Produto produto) {
+		this.produtos.add(produto);
 	}
 
 	@Override
@@ -94,5 +113,6 @@ public class Comanda {
 			return false;
 		return true;
 	}
+
 
 }
