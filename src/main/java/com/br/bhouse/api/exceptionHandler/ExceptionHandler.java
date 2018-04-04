@@ -39,6 +39,8 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 		}
 		return errorList;
 	}
+	
+	
 
 	
 	static class Error {

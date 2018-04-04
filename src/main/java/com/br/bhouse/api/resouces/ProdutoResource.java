@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.br.bhouse.api.event.CreatedResourceEvent;
 import com.br.bhouse.api.model.Produto;
 import com.br.bhouse.api.repository.ProdutoRepository;
+import com.br.bhouse.api.services.ProdutoService;
 
 @RestController
 @RequestMapping("/produtos")
@@ -25,6 +26,9 @@ public class ProdutoResource {
 
 	@Autowired
 	private ProdutoRepository repository;
+	
+	@Autowired
+	private ProdutoService produtoService;
 
 	@Autowired
 	private ApplicationEventPublisher publisher;
@@ -40,12 +44,18 @@ public class ProdutoResource {
 	}
 
 
-	@GetMapping("/{id}")
+/*	@GetMapping("/{id}")
 	@ResponseBody
 	public ResponseEntity<Produto> findById(@PathVariable long id) {
-		Produto produto = repository.getOne(id);
+		Produto produto = repository.findOne(id);
 		return produto != null ? ResponseEntity.ok(produto) : ResponseEntity.notFound().build();
-
+	}*/
+	
+	@GetMapping("/{codigo}")
+	@ResponseBody
+	public ResponseEntity<Produto> findByCodigo(@PathVariable int codigo) {
+		Produto produto = produtoService.findProdutoByCodigo(codigo);
+		return produto != null ? ResponseEntity.ok(produto) : ResponseEntity.notFound().build();
 	}
 
 }

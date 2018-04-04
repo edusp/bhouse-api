@@ -3,19 +3,22 @@ package com.br.bhouse.api.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
-import com.br.bhouse.api.model.enums.Status;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Comanda {
@@ -29,19 +32,23 @@ public class Comanda {
 	@JoinColumn(name = "id_produto")
 	private List<Produto> produtos = new ArrayList<>();
 
-	private BigDecimal total;
+	private BigDecimal total = new BigDecimal(0);
 
 	private LocalDate data;
+
+	private boolean emAberto;
+
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinColumn(name = "id_comanda")
+	private Set<QuantidadeProdutoComanda> quantidadeProdutoComandas = new HashSet<>();
 	
-	@Enumerated(EnumType.STRING)
-	private Status status;
 
 	public Comanda() {
 	}
-	
-	public Comanda(LocalDate now, Status status) {
+
+	public Comanda(LocalDate now, boolean emAberto) {
 		data = now;
-		this.status = status;
+		this.emAberto = emAberto;
 	}
 
 	public long getId() {
@@ -75,9 +82,35 @@ public class Comanda {
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
+
+	public boolean isEmAberto() {
+		return emAberto;
+	}
+
+	public void setEmAberto(boolean emAberto) {
+		this.emAberto = emAberto;
+	}
 	
+
+	public Set<QuantidadeProdutoComanda> getQuantidadeProdutoComandas() {
+		return quantidadeProdutoComandas;
+	}
+
+	public void setQuantidadeProdutoComandas(Set<QuantidadeProdutoComanda> quantidadeProdutoComandas) {
+		this.quantidadeProdutoComandas = quantidadeProdutoComandas;
+	}
+
+	@Transient
+	@JsonIgnore
 	public void addProduto(Produto produto) {
-		this.produtos.add(produto);
+
+
+	}
+
+	@Transient
+	@JsonIgnore
+	public void updateTotal(Produto produto) {
+		this.total = total.add(produto.getPreco());
 	}
 
 	@Override
@@ -113,6 +146,5 @@ public class Comanda {
 			return false;
 		return true;
 	}
-
 
 }
