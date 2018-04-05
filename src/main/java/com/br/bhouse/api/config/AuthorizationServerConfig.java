@@ -26,7 +26,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		.secret("bhouse")
 		.scopes("read", "write")
 		.authorizedGrantTypes("password")
-		.accessTokenValiditySeconds(20);
+		.accessTokenValiditySeconds(1800);
 	
 	}
 	
