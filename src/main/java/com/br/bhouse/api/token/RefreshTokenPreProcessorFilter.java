@@ -28,7 +28,6 @@ public class RefreshTokenPreProcessorFilter implements Filter{
 
 		HttpServletRequest req = (HttpServletRequest)request;
 		
-		
 		if ("/oauth/token".equalsIgnoreCase(req.getRequestURI())
 				&& "refresh_token".equals(req.getParameter("grant_type"))
 				&& req.getCookies() != null) {
@@ -40,8 +39,8 @@ public class RefreshTokenPreProcessorFilter implements Filter{
 					req = new ServletRequestWarepperHelpper(req, refreshToken);
 				}
 			}
-			
 		}
+		
 		chain.doFilter(req, response);
 	}
 		

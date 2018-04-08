@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,8 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Comanda {
 
 	@Id
-	@SequenceGenerator(name = "comanda_seq", sequenceName = "comanda_seq", initialValue = 1, allocationSize = 30)
-	@GeneratedValue(generator = "comanda_seq", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
 	@ManyToMany

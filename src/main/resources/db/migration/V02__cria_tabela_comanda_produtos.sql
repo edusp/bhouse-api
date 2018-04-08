@@ -1,0 +1,1 @@
+create table IF NOT EXISTS comanda_produtos (comanda_id int8 not null, produtos_id int8 not null)

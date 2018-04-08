@@ -1,7 +1,6 @@
 package com.br.bhouse.api.resouces;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -67,6 +66,7 @@ public class ComandaResource {
 		return ResponseEntity.status(HttpStatus.OK).body(comanda);
 	}
 
+	
 	@GetMapping
 	public Page<Comanda> listAll(ComandaFilter filter, Pageable pageable){
 		return comandaRepository.filtrar(filter, pageable);

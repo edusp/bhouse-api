@@ -1,5 +1,7 @@
 package com.br.bhouse.api.resouces;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +44,12 @@ public class ProdutoResource {
 		publisher.publishEvent(new CreatedResourceEvent(this, response, produtoSalvo.getId()));
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(produtoSalvo);
+	}
+	
+	@GetMapping
+	@PreAuthorize("hasAuthority('ROLE_LISTAR_PRODUTO')")//and #oauth2.hasScope('read')
+	public List<Produto> listAll(){
+		return repository.findAll();
 	}
 
 
