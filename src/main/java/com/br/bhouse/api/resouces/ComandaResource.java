@@ -41,7 +41,7 @@ public class ComandaResource {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
-	public ResponseEntity<Comanda> openComanda(HttpServletResponse response){
+	public ResponseEntity<Comanda> openComanda(HttpServletResponse response) {
 		Comanda newComanda = comandaRepository.save(new Comanda(LocalDate.now(), true));
 
 		publisher.publishEvent(new CreatedResourceEvent(this, response, newComanda.getId()));
@@ -50,7 +50,7 @@ public class ComandaResource {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Comanda> getComanda(@PathVariable long id, HttpServletResponse response){
+	public ResponseEntity<Comanda> getComanda(@PathVariable long id, HttpServletResponse response) {
 
 		Comanda comanda = comandaRepository.findOne(id);
 
@@ -59,7 +59,7 @@ public class ComandaResource {
 
 
 	@PutMapping("/{id}/produto")
-	public ResponseEntity<Comanda> addProduto(@PathVariable long id, @RequestBody long produto){
+	public ResponseEntity<Comanda> addProduto(@PathVariable long id, @RequestBody long produto) {
 
 		Comanda comanda = comandaService.addProdutoToComanda(id, produto);
 

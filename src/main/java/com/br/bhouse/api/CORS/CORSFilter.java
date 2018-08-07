@@ -19,28 +19,29 @@ import org.springframework.stereotype.Component;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORSFilter implements Filter{
 
-	private String originPermitida = "http:localhost:8080";//TODO 
+	private String originPermitida = "http://localhost:4200";//TODO Origin do CORS
+	private String origin = "https://bhouse-api.herokuapp.com";
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
-		
-		resp.setHeader("Access-Control-Allow-Origin", originPermitida);
+
+		resp.setHeader("Access-Control-Allow-Origin", origin);
 		resp.setHeader("Access-Control-Allow-Credentials", "true");
 		
-		if (("OPTIONM").equals(req.getMethod()) && originPermitida.equals(req.getHeader("Origin")) ) {
-			resp.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
+		if ("OPTIONS".equals(req.getMethod()) 
+				&& origin.equals(req.getHeader("Origin")) ) {
+			resp.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
 			resp.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept");
-			resp.setHeader("Access-Control-Allow-Max-Age", "3600");
+			resp.setHeader("Access-Control-Max-Age", "3600");
+			resp.setHeader("Access-Control-Allow-Origin", origin);
+			resp.setHeader("Access-Control-Allow-Credentials", "true");
 			
 			resp.setStatus(HttpServletResponse.SC_OK);
-			
 		}else {
 			chain.doFilter(req, resp);
 		}
-		
 		
 	}
 
