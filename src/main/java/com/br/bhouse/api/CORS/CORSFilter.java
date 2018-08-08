@@ -19,8 +19,8 @@ import org.springframework.stereotype.Component;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORSFilter implements Filter{
 
-	private String originPermitida = "http://localhost:4200";//TODO Origin do CORS
-	private String origin = "https://bhouse-ui.herokuapp.com";
+	//private String origin = "http://localhost:4200";//TODO Origin do CORS
+	private String origin = "https://deploy-ui-test.herokuapp.com";
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
