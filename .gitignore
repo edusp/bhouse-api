@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> ca809e51e5067812227aee31274420bfa55b6a2a
 # Created by https://www.gitignore.io/api/java,eclipse,java-web
 
 ### Eclipse ###
@@ -61,6 +64,10 @@ local.properties
 .classpath
 
 ### Java ###
+<<<<<<< HEAD
+=======
+
+>>>>>>> ca809e51e5067812227aee31274420bfa55b6a2a
 # Compiled class file
 *.class
 
@@ -76,6 +83,10 @@ local.properties
 # Package Files #
 *.jar
 *.war
+<<<<<<< HEAD
+=======
+*.nar
+>>>>>>> ca809e51e5067812227aee31274420bfa55b6a2a
 *.ear
 *.zip
 *.tar.gz
@@ -88,5 +99,9 @@ hs_err_pid*
 ## ignoring target file
 target/
 
+<<<<<<< HEAD
 
 # End of https://www.gitignore.io/api/java,eclipse,java-web
+=======
+# End of https://www.gitignore.io/api/java,eclipse,java-web
+>>>>>>> ca809e51e5067812227aee31274420bfa55b6a2a

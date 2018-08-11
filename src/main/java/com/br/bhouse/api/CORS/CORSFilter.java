@@ -24,6 +24,7 @@ public class CORSFilter implements Filter{
 
 	@Autowired
 	private BhouseApiProperty apiProperty;
+
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -39,15 +40,10 @@ public class CORSFilter implements Filter{
 			resp.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept");
 			resp.setHeader("Access-Control-Max-Age", "3600");
 			resp.setHeader("Access-Control-Allow-Origin", apiProperty.getSecurity().getAllowedOrigin());
-			resp.setHeader("Access-Control-Allow-Credentials", "true");
-			
-			resp.setStatus(HttpServletResponse.SC_OK);
-		}else {
 			chain.doFilter(req, resp);
 		}
 		
 	}
-
 	
 	
 	@Override
