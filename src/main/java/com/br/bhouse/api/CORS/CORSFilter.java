@@ -24,7 +24,6 @@ public class CORSFilter implements Filter{
 
 	@Autowired
 	private BhouseApiProperty apiProperty;
-
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
