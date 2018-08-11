@@ -1,0 +1,1 @@
+create table IF NOT EXISTS comanda (id  bigserial not null, data date, em_aberto boolean not null, total numeric(19, 2), primary key (id))

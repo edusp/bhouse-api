@@ -1,0 +1,1 @@
+create table IF NOT EXISTS quantidade_produto_comanda (id  bigserial not null, id_produto int8 not null, quantidade int4 not null, id_comanda int8, primary key (id))

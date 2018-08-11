@@ -1,0 +1,1 @@
+alter table produto add constraint UK_permissao_codigo unique (codigo)

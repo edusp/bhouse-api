@@ -1,0 +1,1 @@
+create table IF NOT EXISTS permissao (id int8 not null, descricao varchar(50), primary key (id))

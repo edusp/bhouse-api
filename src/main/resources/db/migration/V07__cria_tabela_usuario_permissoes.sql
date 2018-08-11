@@ -1,0 +1,1 @@
+create table IF NOT EXISTS usuario_permissao (usuario_id int8 not null, permissao_id int8 not null)

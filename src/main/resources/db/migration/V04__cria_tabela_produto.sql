@@ -1,0 +1,1 @@
+create table IF NOT EXISTS produto (id  bigserial not null, codigo int4, descricao varchar(120), marca varchar(80), nome varchar(80) not null, preco numeric(19, 2), primary key (id))
