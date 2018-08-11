@@ -14,6 +14,7 @@ public class BhouseApiProperty {
 	public static class Security {
 
 		private boolean enableHttps;
+		private String allowedOrigin;
 
 		public boolean isEnableHttps() {
 			return enableHttps;
@@ -21,6 +22,14 @@ public class BhouseApiProperty {
 
 		public void setEnableHttps(boolean enableHttps) {
 			this.enableHttps = enableHttps;
+		}
+
+		public String getAllowedOrigin() {
+			return allowedOrigin;
+		}
+
+		public void setAllowedOrigin(String allowedOrigin) {
+			this.allowedOrigin = allowedOrigin;
 		}
 
 	}
