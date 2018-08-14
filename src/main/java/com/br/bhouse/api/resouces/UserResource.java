@@ -41,7 +41,7 @@ public class UserResource {
 		return user.isPresent() ? ResponseEntity.ok(user.get()) : ResponseEntity.notFound().build();
 	}
 	
-	@GetMapping
+	@GetMapping("{id}")
 	public ResponseEntity<Usuario> getById(@PathVariable long id) {
 		Usuario user = usuarioRepository.getOne(id);
 		Optional<Usuario> userOptional = Optional.of(user);
