@@ -1,4 +1,4 @@
-package com.br.bhouse.api.config;
+ package com.br.bhouse.api.config;
 
 import java.util.Arrays;
 
@@ -26,7 +26,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-
 		clients.inMemory()
 		.withClient("bhouseApi")
 		.secret("bhouse")
@@ -41,25 +40,18 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
 		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancer(), accessTokenConverter()));
-		
+
 		endpoints
-			.tokenStore(tokenStore())
-			.tokenEnhancer(tokenEnhancerChain)
-			.reuseRefreshTokens(false)
+		.tokenStore(tokenStore())
+		.tokenEnhancer(tokenEnhancerChain)
+		.reuseRefreshTokens(false)
 		.authenticationManager(authenticationManager);
 	}
 
 	@Bean
-	public CustonTokenEnhancer tokenEnhancer() {
-		return new CustonTokenEnhancer();
-	}
-
-	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
-
 		JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
-		accessTokenConverter.setSigningKey("bhouse");
-		
+		accessTokenConverter.setSigningKey("bhouseApi");
 		return accessTokenConverter;
 	}
 
@@ -67,5 +59,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	public TokenStore tokenStore() {
 		return new JwtTokenStore(accessTokenConverter());
 	}
+
+	@Bean
+	public CustonTokenEnhancer tokenEnhancer() {
+		return new CustonTokenEnhancer();
+	}
+
+	
 	
 }

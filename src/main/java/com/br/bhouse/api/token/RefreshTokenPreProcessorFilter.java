@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
-public class RefreshTokenPreProcessorFilter implements Filter{
+public class RefreshTokenPreProcessorFilter implements Filter {
 
 
 	@Override
@@ -33,7 +33,6 @@ public class RefreshTokenPreProcessorFilter implements Filter{
 				&& req.getCookies() != null) {
 			
 			for (Cookie cookie : req.getCookies()) {
-				
 				if (cookie.getName().equals("refreshToken")) {
 					String refreshToken = cookie.getValue();
 					req = new ServletRequestWarepperHelpper(req, refreshToken);
@@ -43,18 +42,8 @@ public class RefreshTokenPreProcessorFilter implements Filter{
 		
 		chain.doFilter(req, response);
 	}
-		
-		
-	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-	}
-
-	@Override
-	public void destroy() {
-	}
 	
-	
-	static class ServletRequestWarepperHelpper extends HttpServletRequestWrapper{
+	static class ServletRequestWarepperHelpper extends HttpServletRequestWrapper {
 		
 		private String refreshToken;
 
@@ -66,15 +55,21 @@ public class RefreshTokenPreProcessorFilter implements Filter{
 		@Override
 		public Map<String, String[]> getParameterMap() {
 			ParameterMap<String, String[]> map = new ParameterMap<>(getRequest().getParameterMap());
-			
 			map.put("refresh_token", new String[] {refreshToken});
-			
 			map.setLocked(true);
 			
 			return map;
 
 		}
 		
+	}
+	
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+	}
+
+	@Override
+	public void destroy() {
 	}
 
 }

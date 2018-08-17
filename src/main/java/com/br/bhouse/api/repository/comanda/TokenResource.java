@@ -24,6 +24,9 @@ public class TokenResource {
 		
 		Cookie cookie = new Cookie("refreshToken", null);
 		cookie.setHttpOnly(true);
+		
+		System.out.println(apiProperty.getSecurity().isEnableHttps());
+		
 		cookie.setSecure(apiProperty.getSecurity().isEnableHttps());
 		cookie.setPath(request.getContextPath()+ "/oauth/token");
 		cookie.setMaxAge(0);

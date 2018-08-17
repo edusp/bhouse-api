@@ -30,11 +30,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		/*auth.inMemoryAuthentication()
 		.withUser("admin").password("admin").roles("ROLE");*/
-		
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-		
 	}
-	
 
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
@@ -61,7 +58,5 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		return new OAuth2MethodSecurityExpressionHandler();
 		
 	}
-
-	
 	
 }
